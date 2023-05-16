@@ -10,19 +10,23 @@ import java.util.ArrayList;
 
 public class Avatar {
 
+    // Elementos graficos
     private Canvas canvas;
     private GraphicsContext graphicsContext;
-
-    private double posX;
-    private double posY;
-
     private ArrayList<Image> idleImages;
     private ArrayList<Image> runImages;
     private ArrayList<Image> attackImages;
 
+    // referencias espaciales
+    private double posX;
+    private double posY;
+
+    private Vector position;
+    private Vector direction;
+
+    // estado actual del personaje
     private int state;
     private int frame;
-
     private boolean upPressed;
     private boolean downPressed;
     private boolean leftPressed;
@@ -33,6 +37,9 @@ public class Avatar {
         this.state = 0;
         this.canvas = canvas;
         this.graphicsContext = canvas.getGraphicsContext2D();
+
+        this.position = new Vector(100, 100);
+
         this.posX = 100;
         this.posY = 100;
 
@@ -59,32 +66,35 @@ public class Avatar {
     public void paint(){
         onMove();
         if (state == 0){
-            graphicsContext.drawImage(idleImages.get(frame%3), posX, posY);
+            graphicsContext.drawImage(idleImages.get(frame%3), position.getX(), position.getY());
             frame++;
         }
         else if(state == 1) {
-            graphicsContext.drawImage(runImages.get(frame%5), posX, posY);
+            graphicsContext.drawImage(runImages.get(frame%5), position.getX(), position.getY());
             frame++;
         }
         else if (state == 2) {
-            graphicsContext.drawImage(attackImages.get(frame%4), posX, posY);
+            graphicsContext.drawImage(attackImages.get(frame%4), position.getX(), position.getY());
             frame++;
         }
     }
 
     public void onKeyPressed(KeyEvent event){
-        state = 1;
         switch (event.getCode()){
             case W:
+                state = 1;
                 upPressed = true;
                 break;
             case S:
+                state = 1;
                 downPressed = true;
                 break;
             case D:
+                state = 1;
                 rightPressed = true;
                 break;
             case A:
+                state = 1;
                 leftPressed = true;
                 break;
         }
@@ -110,16 +120,16 @@ public class Avatar {
 
     public void onMove(){
         if (upPressed){
-            posY -= 10;
+            position.setY(position.getY() - 10);
         }
         if (downPressed){
-            posY += 10;
+            position.setY(position.getY() + 10);
         }
         if (leftPressed){
-            posX -= 10;
+            position.setX(position.getX() - 10);
         }
         if (rightPressed){
-            posX += 10;
+            position.setX(position.getX() + 10);
         }
     }
 }
