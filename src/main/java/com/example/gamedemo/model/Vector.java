@@ -9,6 +9,18 @@ public class Vector {
         this.x = x;
         this.y = y;
     }
+    public void normalize(){
+        double magnitude = Math.sqrt(x * x + y * y);
+        if (magnitude != 0) {
+            x /= magnitude;
+            y /= magnitude;
+        }
+    }
+
+    public void setSpeed(int speed){
+        x*=speed;
+        y*=speed;
+    }
 
     public double getX() {
         return x;

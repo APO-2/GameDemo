@@ -60,6 +60,10 @@ public class MainController implements Initializable {
         canvas.setOnKeyReleased(event -> {
             screens.get(SCREEN).onKeyReleased(event);
         });
+
+        canvas.setOnMousePressed(event -> {
+            screens.get(SCREEN).onMousePressed(event);
+        });
     }
 
     private void pause(int time){

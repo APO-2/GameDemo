@@ -132,4 +132,8 @@ public class Avatar {
             position.setX(position.getX() + 10);
         }
     }
+
+    public Vector getPosition() {
+        return position;
+    }
 }
